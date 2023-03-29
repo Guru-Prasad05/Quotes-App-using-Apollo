@@ -1,0 +1,68 @@
+mIbg6D5ykekIqAQ9
+
+query getAllUsers{
+  users{
+    firstName
+    _id
+    email  
+  }
+}
+-----------------
+query getAllQuotes{
+          quotes{
+           name
+           by{
+            _id
+            firstName
+                }
+              }
+            }
+------------------
+query getUserQuotes{
+  users{
+    firstName
+    _id
+    email  
+    quotes{
+      name
+    }
+  }
+}
+------------
+query getUserById($userid:ID!){
+ user(_id:$userid){
+  _id
+  firstName
+  lastName
+  email
+ 
+}
+}
+-----------
+query getQuoteByUser($userid:ID!){
+iquote(by:$userid){
+  name
+}
+}
+
+-----------------
+mutation createUser($usernew:UserInput!){
+  user:signupUserDummy(usernew:$usernew){
+    _id
+    email
+    firstName
+    lastname
+  }
+}
+
+---------------------------------
+mutation SigninUser($userSignin:UserSigninInput!){
+  user:signinUser(userSignin:$userSignin){
+   token
+  }
+}
+
+--------------------------------
+mutation{
+  quote:createQuote(name:"this quote is awesome")
+}
